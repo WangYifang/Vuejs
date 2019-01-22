@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <h1>Component</h1>
+        <div id="components-demo">
+            <button-counter></button-counter>
+            <button-counter></button-counter>
+            <button-counter></button-counter>
+            <!-- <blog-post title="My journey with Vue"></blog-post>
+            <blog-post title="Blogging with Vue"></blog-post>
+            <blog-post title="Why Vue is so fun"></blog-post>    -->
+        </div>
+        <br>
+        <div id="blog-post-demo">
+            <!-- <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post> -->
+            <hr>
+            <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></blog-post>
+        </div>
+        <hr>
+        <div id="blog-posts-events-demo">
+            <!-- 下面这个div是<blog-post>的父级组件 -->
+            <div :style="{ fontSize: postFontSize + 'em' }">
+                <blog-post
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="postFontSize += $event"></blog-post>
+            </div>
+        </div>
+
+        <!-- v-model on component -->
+        <!-- 在组件上使用 v-model -->
+        <hr>
+        <div id="v-model">
+            <custom-input v-model="searchText">
+            </custom-input>
+            <alert-box></alert-box>
+        </div>
+
+        <!-- Custom Directives -->
+        <input v-focus>
+
+        <div id="hook-arguments-example" v-demo="{ color: 'white', text: 'hello!' }">
+        </div>
+
+    
+
+
+
+
+        <script src="../js/component.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+
+    </body>
+</html>
