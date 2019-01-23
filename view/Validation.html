@@ -1,0 +1,67 @@
+<!-- Using vuefire (the official Firebase binding) -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vuexfire@next"></script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+
+        <style>
+            body {
+            font-family: Helvetica, Arial, sans-serif;
+            }
+
+            ul {
+            padding: 0;
+            }
+
+            .user {
+            height: 30px;
+            line-height: 30px;
+            padding: 10px;
+            border-top: 1px solid #eee;
+            overflow: hidden;
+            transition: all .25s ease;
+            }
+
+            .user:last-child {
+            border-bottom: 1px solid #eee;
+            }
+
+            .v-enter, .v-leave-active {
+            height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top-width: 0;
+            border-bottom-width: 0;
+            }
+
+            .errors {
+            color: #f00;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Firebase + Validation Example</h1>
+        <div id="app">
+            <ul is="transition-group">
+                <li v-for="user in users" class="user" :key="user['.key']">
+                    <span>{{ user.name }} - {{ user.email }}</span>
+                    <button v-on:click="removeUser(user)">X</button>
+                </li>
+            </ul>
+            <form id="form" v-on:submit.prevent="addUser">
+                <input type="text" v-model="newUser.name" placeholder="Username">
+                <input type="email" v-model="newUser.email" placeholder="email@email.com">
+                <input type="submit" value="Add User">
+            </form>
+            <ul class="errors">
+                <li v-show="!validation.name">Name cannot be empty.</li>
+                <li v-show="!validation.email">Please provide a valid email address.</li>
+            </ul>
+        </div>
+        <script src="../js/Validation.js"></script>
+
+    </body>
+</html>
